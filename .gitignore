@@ -1,0 +1,66 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+
+# Generated Data files
+data/
+*.csv
+*.pkl
+*.pickle
+*.parquet
+
+# Generated outputs
+visualizations/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Local development
+.env.local
+*.log
+*.tmp
+
+# docs
+AGENT_CONTEXT.md
+PROJECT_MEMORY.md
+QUICK_REFERENCE.md
+
+# later remove from gitignore
+evaluation_metrics.md
