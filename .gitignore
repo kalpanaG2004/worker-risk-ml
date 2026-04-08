@@ -60,7 +60,8 @@ Thumbs.db
 # docs
 AGENT_CONTEXT.md
 PROJECT_MEMORY.md
-QUICK_REFERENCE.md
+WEEK1_QUICK_REFERENCE.md
+WEEK2_QUICK_REFERENCE.md
 
 # later remove from gitignore
 evaluation_metrics.md
