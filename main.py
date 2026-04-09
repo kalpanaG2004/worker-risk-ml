@@ -11,6 +11,7 @@ from eda_analysis import perform_eda, load_datasets
 from baseline_model import train_baseline_model
 from model_refinement import model_refinement_pipeline
 from worker_clustering import worker_clustering_pipeline
+from recommendation_engine import recommendation_pipeline
 
 
 def main():
@@ -164,6 +165,56 @@ def run_week3_clustering():
     print("  - Supports personalized training and assignment optimization")
 
 
+def run_week4_recommendations():
+    print("\n" + "=" * 70)
+    print("ADAPTIVE SKILL AND SAFETY RECOMMENDATION SYSTEM")
+    print("Week 4: Recommendation Engine & Personalized Rules")
+    print("=" * 70)
+    
+    results = recommendation_pipeline()
+    
+    print("\n" + "=" * 70)
+    print("Week 4 Recommendation Engine Complete")
+    print("=" * 70)
+    
+    print("\nRecommendation Summary:")
+    stats = results['summary_stats'].iloc[0]
+    
+    print("\n Risk Distribution:")
+    print(f"  - High Risk: {int(stats['High Risk Count'])} workers ({stats['High Risk %']:.1f}%)")
+    print(f"  - Medium Risk: {int(stats['Medium Risk Count'])} workers ({stats['Medium Risk %']:.1f}%)")
+    print(f"  - Low Risk: {int(stats['Low Risk Count'])} workers ({stats['Low Risk %']:.1f}%)")
+    
+    print("\n Priority Distribution:")
+    high_priority = stats['High Priority Count']
+    print(f"  - High Priority (Intervention Needed): {int(high_priority)} workers ({stats['High Priority %']:.1f}%)")
+    
+    print("\n Cluster Distribution:")
+    print(f"  - Cluster 0 (Experienced): {int(stats['Cluster 0 Count'])} workers")
+    print(f"  - Cluster 1 (Developing): {int(stats['Cluster 1 Count'])} workers")
+    
+    print(f"\n Average Confidence Score: {stats['Avg Confidence']:.1%}")
+    
+    print("\nGenerated Files:")
+    print("  Data:")
+    print("    - data/worker_recommendations.csv (all recommendations)")
+    print("    - data/recommendations_detailed/ (detailed text reports)")
+    print("    - data/recommendations_summary_stats.csv (summary statistics)")
+    
+    print("\nKey Features:")
+    print("  ✓ Rule-based decision engine with 6 cluster-risk combinations")
+    print("  ✓ Personalized recommendations per worker cluster")
+    print("  ✓ Transparent explanations for all recommendations")
+    print("  ✓ Skill development, task suitability, supervision, training priorities")
+    print("  ✓ Career path and safety mitigation strategies")
+    print("  ✓ Confidence scores and priority levels")
+    
+    print("\nNext Steps (Week 5):")
+    print("  - Enhance recommendation engine with additional rules")
+    print("  - Build explanation UI for recommendations")
+    print("  - Integrate with web interface")
+
+
 if __name__ == '__main__':
     import sys
     
@@ -172,9 +223,11 @@ if __name__ == '__main__':
             run_week2_refinement()
         elif sys.argv[1] == 'week3':
             run_week3_clustering()
+        elif sys.argv[1] == 'week4':
+            run_week4_recommendations()
         else:
             print(f"Unknown argument: {sys.argv[1]}")
-            print("Usage: python main.py [week2|week3]")
+            print("Usage: python main.py [week2|week3|week4]")
     else:
         main()
 
