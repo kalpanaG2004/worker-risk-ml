@@ -10,6 +10,7 @@ from generate_assignments import generate_assignments, save_assignments
 from eda_analysis import perform_eda, load_datasets
 from baseline_model import train_baseline_model
 from model_refinement import model_refinement_pipeline
+from worker_clustering import worker_clustering_pipeline
 
 
 def main():
@@ -115,11 +116,65 @@ def run_week2_refinement():
     print(f"\nOptimal Probability Threshold: {refinement_results['optimal_threshold']:.2f}")
 
 
+def run_week3_clustering():
+    print("\n" + "=" * 70)
+    print("ADAPTIVE SKILL AND SAFETY RECOMMENDATION SYSTEM")
+    print("Week 3: Worker Clustering & Segmentation")
+    print("=" * 70)
+    
+    clustering_results = worker_clustering_pipeline()
+    
+    print("\n" + "=" * 70)
+    print("Week 3 Clustering Analysis Complete")
+    print("=" * 70)
+    
+    print("\nClustering Summary:")
+    print(f"Optimal Number of Clusters: {clustering_results['optimal_k']}")
+    
+    print("\nCluster Profiles:")
+    profiles = clustering_results['profiles']
+    for idx, profile in profiles.iterrows():
+        print(f"\nCluster {int(profile['Cluster'])}:")
+        print(f"  Size: {int(profile['Size'])} workers")
+        print(f"  Characterization: {profile['Characterization']}")
+        print(f"  Avg Experience: {profile['Avg_Experience']:.2f} years")
+        print(f"  Avg Skill Score: {profile['Avg_Skill_Score']:.2f}")
+        print(f"  Certified: {profile['Certified_%']:.1f}%")
+        print(f"  Training Complete: {profile['Training_Completed_%']:.1f}%")
+        print(f"  Avg Past Incidents: {profile['Avg_Incidents']:.2f}")
+        print(f"  Avg Skill Mismatch: {profile['Avg_Skill_Mismatch']:.3f}")
+        print(f"  Avg Assignment Risk: {profile['Avg_Assignment_Risk']:.3f}")
+    
+    print("\nGenerated Files:")
+    print("  Data:")
+    print("    - data/worker_clusters.csv (cluster assignments)")
+    print("    - data/cluster_profiles.csv (cluster characteristics)")
+    print("    - data/kmeans_model.pkl (K-Means model)")
+    print("    - data/hierarchical_model.pkl (Hierarchical model)")
+    
+    print("\n  Visualizations:")
+    print("    - visualizations/kmeans_optimization_metrics.png")
+    print("    - visualizations/cluster_profiles.png")
+    print("    - visualizations/silhouette_analysis.png")
+    print("    - visualizations/hierarchical_dendrogram.png")
+    
+    print("\nKey insights:")
+    print("  - Worker clusters identify distinct skill and risk profiles")
+    print("  - Enables targeted recommendation strategies per cluster")
+    print("  - Supports personalized training and assignment optimization")
+
+
 if __name__ == '__main__':
     import sys
     
-    if len(sys.argv) > 1 and sys.argv[1] == 'week2':
-        run_week2_refinement()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'week2':
+            run_week2_refinement()
+        elif sys.argv[1] == 'week3':
+            run_week3_clustering()
+        else:
+            print(f"Unknown argument: {sys.argv[1]}")
+            print("Usage: python main.py [week2|week3]")
     else:
         main()
 
