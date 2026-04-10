@@ -1,9 +1,3 @@
-"""
-CLI Interface - Week 6
-Command-line interface for interacting with the integrated recommendation system.
-Provides user-friendly commands for querying workers, viewing recommendations, and generating reports.
-"""
-
 import argparse
 import sys
 from pathlib import Path
@@ -14,15 +8,12 @@ from integration_layer import IntegrationLayer
 
 
 class RecommendationCLI:
-    """Command-line interface for the recommendation system"""
     
     def __init__(self):
-        """Initialize CLI and load integration layer"""
         self.integration = None
         self.load_system()
     
     def load_system(self):
-        """Load the integrated system"""
         try:
             self.integration = IntegrationLayer()
         except Exception as e:
@@ -30,7 +21,6 @@ class RecommendationCLI:
             sys.exit(1)
     
     def worker_info(self, worker_id: str):
-        """Display detailed worker profile"""
         print("\n" + "=" * 80)
         print("WORKER PROFILE")
         print("=" * 80)
@@ -77,7 +67,6 @@ class RecommendationCLI:
         print("\n" + "=" * 80 + "\n")
     
     def search_workers(self, query: str):
-        """Search and filter workers"""
         print("\n" + "=" * 80)
         print("WORKER SEARCH RESULTS")
         print("=" * 80)
@@ -126,7 +115,6 @@ class RecommendationCLI:
         print("\n" + "=" * 80 + "\n")
     
     def cluster_summary(self, cluster_id: int):
-        """Display cluster summary statistics"""
         print("\n" + "=" * 80)
         print(f"CLUSTER {cluster_id} SUMMARY")
         print("=" * 80)
@@ -161,7 +149,6 @@ class RecommendationCLI:
         print("\n" + "=" * 80 + "\n")
     
     def show_recommendations(self, n: int = 10):
-        """Show sample recommendations"""
         print("\n" + "=" * 80)
         print("SAMPLE RECOMMENDATIONS")
         print("=" * 80)
@@ -174,7 +161,6 @@ class RecommendationCLI:
         print("\n" + "=" * 80 + "\n")
     
     def confidence_report(self):
-        """Display confidence metrics"""
         print("\n" + "=" * 80)
         print("CONFIDENCE METRICS")
         print("=" * 80)
@@ -202,7 +188,6 @@ class RecommendationCLI:
         print("\n" + "=" * 80 + "\n")
     
     def system_status(self):
-        """Display overall system status"""
         print("\n" + "=" * 80)
         print("SYSTEM STATUS")
         print("=" * 80)
@@ -241,7 +226,6 @@ class RecommendationCLI:
         print("\n" + "=" * 80 + "\n")
     
     def export_report(self, worker_id: str, output_file: Optional[str] = None):
-        """Export worker report to file"""
         
         if output_file is None:
             output_file = f"reports/{worker_id}_integrated_report.txt"
@@ -257,7 +241,6 @@ class RecommendationCLI:
 
 
 def main():
-    """CLI main entry point"""
     
     parser = argparse.ArgumentParser(
         description='Worker Recommendation System CLI Interface',

@@ -1,9 +1,3 @@
-"""
-Integration Layer - Week 6
-Combines ML model outputs, worker clustering, and recommendations into unified interface.
-Provides confidence scoring and integration metrics.
-"""
-
 import pandas as pd
 import numpy as np
 import pickle
@@ -14,16 +8,8 @@ warnings.filterwarnings('ignore')
 
 
 class IntegrationLayer:
-    """
-    Unified interface combining all system components:
-    - ML risk prediction model
-    - Worker clustering
-    - Recommendation engine
-    - Confidence scoring
-    """
     
     def __init__(self, data_dir='data', model_dir='data'):
-        """Initialize integration layer with all trained models"""
         
         print("Initializing Integration Layer...")
         
@@ -38,7 +24,6 @@ class IntegrationLayer:
         print("✓ Integration Layer ready")
     
     def _load_models(self):
-        """Load all trained models"""
         
         # Load ML risk prediction model
         with open(f'{self.model_dir}/best_model.pkl', 'rb') as f:
@@ -59,7 +44,6 @@ class IntegrationLayer:
         print("  ✓ Decision engine loaded")
     
     def _load_data(self):
-        """Load datasets"""
         
         self.workers = pd.read_csv(f'{self.data_dir}/workers.csv')
         self.tasks = pd.read_csv(f'{self.data_dir}/tasks.csv')
@@ -70,21 +54,11 @@ class IntegrationLayer:
         print("  ✓ Data loaded")
     
     def _load_recommendations(self):
-        """Load pre-generated recommendations"""
         
         self.recommendations = pd.read_csv(f'{self.data_dir}/worker_recommendations.csv')
         print("  ✓ Recommendations loaded")
     
     def get_worker_profile(self, worker_id: str) -> Dict:
-        """
-        Get complete worker profile including cluster, risk, and recommendations.
-        
-        Args:
-            worker_id: Worker identifier
-        
-        Returns:
-            Dictionary with complete worker information
-        """
         
         worker = self.workers[self.workers['worker_id'] == worker_id]
         if worker.empty:
@@ -118,15 +92,6 @@ class IntegrationLayer:
         return worker_data
     
     def get_cluster_summary(self, cluster_id: int) -> Dict:
-        """
-        Get summary statistics for a cluster.
-        
-        Args:
-            cluster_id: Cluster number (0 or 1)
-        
-        Returns:
-            Cluster statistics and worker information
-        """
         
         cluster_data = self.worker_clusters[self.worker_clusters['kmeans_cluster'] == cluster_id]
         if cluster_data.empty:
@@ -157,20 +122,6 @@ class IntegrationLayer:
         }
     
     def search_by_criteria(self, criteria: Dict) -> pd.DataFrame:
-        """
-        Search workers by multiple criteria.
-        
-        Args:
-            criteria: Dictionary with filters
-                - cluster: int (0 or 1)
-                - risk_level: str ('Low', 'Medium', 'High')
-                - priority: str
-                - min_experience: int
-                - max_incidents: int
-        
-        Returns:
-            DataFrame of matching workers
-        """
         
         results = self.recommendations.copy()
         
@@ -196,12 +147,6 @@ class IntegrationLayer:
         return results
     
     def get_confidence_metrics(self) -> Dict:
-        """
-        Get confidence score statistics and distribution.
-        
-        Returns:
-            Confidence metrics
-        """
         
         confidence_scores = self.recommendations['confidence'].values
         
@@ -224,12 +169,6 @@ class IntegrationLayer:
         }
     
     def get_system_summary(self) -> Dict:
-        """
-        Get overall system integration summary.
-        
-        Returns:
-            Comprehensive system statistics
-        """
         
         recs = self.recommendations
         
@@ -262,16 +201,6 @@ class IntegrationLayer:
         }
     
     def export_worker_report(self, worker_id: str, output_path: Optional[str] = None) -> str:
-        """
-        Export detailed worker report.
-        
-        Args:
-            worker_id: Worker identifier
-            output_path: Optional output file path
-        
-        Returns:
-            Report text
-        """
         
         profile = self.get_worker_profile(worker_id)
         
@@ -328,16 +257,6 @@ class IntegrationLayer:
     
     def get_recommendation_samples(self, n_samples: int = 10, 
                                   criteria: Optional[Dict] = None) -> pd.DataFrame:
-        """
-        Get sample recommendations with optional filtering.
-        
-        Args:
-            n_samples: Number of samples to return
-            criteria: Optional filter criteria
-        
-        Returns:
-            DataFrame of sample recommendations
-        """
         
         if criteria:
             results = self.search_by_criteria(criteria)
@@ -356,7 +275,6 @@ class IntegrationLayer:
 
 
 def integration_summary():
-    """Generate integration layer summary"""
     
     print("\n" + "=" * 80)
     print("WEEK 6: INTEGRATION LAYER")
