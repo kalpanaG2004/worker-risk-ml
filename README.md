@@ -4,15 +4,16 @@ AI/ML-driven worker risk assessment and skill development recommendation system 
 
 **Status**: **COMPLETE & PRODUCTION READY** | **Workers**: 500 | **ML Accuracy**: 88% | **Confidence**: 87.2%
 
-## Quick Start
+## Live Deployment
 
-### Launch Dashboard
-```bash
-cd c:\Users\Admin\Desktop\coding\worker-risk-ml
-.venv\Scripts\Activate.ps1
-streamlit run app.py
-```
-Opens interactive dashboard at `http://localhost:8501`
+**Production Instance**: [https://worker-risk-ml.streamlit.app](https://worker-risk-ml.streamlit.app)
+
+The application is fully deployed on Streamlit Cloud with:
+- ✅ Real-time access via browser (no installation required)
+- ✅ All trained models loaded and operational
+- ✅ Full dataset (500 workers) analyzed
+- ✅ Interactive dashboard with all features enabled
+- ✅ Automatic updates on main branch push
 
 ### Key Metrics
 | Metric | Value | Status |
@@ -85,6 +86,7 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+Opens interactive dashboard at `http://localhost:8501`
 
 **Option 2: CLI**
 ```bash
