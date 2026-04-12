@@ -30,8 +30,12 @@ htmlcov/
 .pydevproject
 .settings/
 
-# Generated Data files
-data/
+# Generated Data files (but include production data)
+data/**
+!data/
+!data/*.csv
+!data/*.pkl
+!data/recommendations_detailed/
 *.csv
 *.pkl
 *.pickle
